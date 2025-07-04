@@ -376,7 +376,7 @@ static const char _data_FX_MODE_DYNAMIC_SMOOTH[] PROGMEM = "Dynamic Smooth@!,!;;
  */
 uint16_t mode_breath(void) {
   unsigned var = 0;
-  unsigned counter = (strip.now * ((SEGMENT.speed >> 3) +10)) & 0xFFFFU;
+  unsigned counter = (strip.now * ((SEGMENT.speed >> 3) +1)) & 0xFFFFU;
   counter = (counter >> 2) + (counter >> 4); //0-16384 + 0-2048
   if (counter < 16384) {
     if (counter > 8192) counter = 8192 - (counter - 8192);
@@ -397,7 +397,7 @@ static const char _data_FX_MODE_BREATH[] PROGMEM = "Breathe@!;!,!;!;01";
  * Fades the LEDs between two colors
  */
 uint16_t mode_fade(void) {
-  unsigned counter = (strip.now * ((SEGMENT.speed >> 3) +10));
+  unsigned counter = (strip.now * ((SEGMENT.speed >> 3) +1));
   uint8_t lum = triwave16(counter) >> 8;
 
   for (unsigned i = 0; i < SEGLEN; i++) {
@@ -462,7 +462,7 @@ static const char _data_FX_MODE_DUAL_SCAN[] PROGMEM = "Scan Dual@!,# of dots,,,,
  * Cycles all LEDs at once through a rainbow.
  */
 uint16_t mode_rainbow(void) {
-  unsigned counter = (strip.now * ((SEGMENT.speed >> 2) +2)) & 0xFFFF;
+  unsigned counter = (strip.now * ((SEGMENT.speed >> 2) +1)) & 0xFFFF;
   counter = counter >> 8;
 
   if (SEGMENT.intensity < 128){
@@ -480,7 +480,7 @@ static const char _data_FX_MODE_RAINBOW[] PROGMEM = "Colorloop@!,Saturation;;!;0
  * Cycles a rainbow over the entire string of LEDs.
  */
 uint16_t mode_rainbow_cycle(void) {
-  unsigned counter = (strip.now * ((SEGMENT.speed >> 2) +2)) & 0xFFFF;
+  unsigned counter = (strip.now * ((SEGMENT.speed >> 2) +1)) & 0xFFFF;
   counter = counter >> 8;
 
   for (unsigned i = 0; i < SEGLEN; i++) {
